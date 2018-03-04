@@ -1,0 +1,38 @@
+{
+  "name": "clitasklistpg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:create" : "createdb tasks",
+    "db:drop" : "dropdb tasks",
+    "db:schema" : "psql tasks < schema.sql",
+    "db:reset" : "npm run db:drop && npm run db:create && npm run db:schema",
+    "test" : "NODE_EVN=test mocha ./test/*_test.js",
+    "test:queries" : "NODE_EVN=test mocha ./test/queries_test.js",
+    "test:app" : "NODE_EVN=test mocha ./test/app_test.js",
+    "test:db:create" : "createdb tasks_test",
+    "test:db:drop" : "dropdb tasks_test",
+    "test:db:schema" : "psql tasks_test < schema.sql",
+    "test:db:reset" : "npm run test:db:drop && npm run test:db:create && npm run test:db:schema"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brac/cliTaskListPg.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brac/cliTaskListPg/issues"
+  },
+  "homepage": "https://github.com/brac/cliTaskListPg#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.1"
+  },
+  "dependencies": {
+    "npm": "^5.7.1",
+    "pg": "^7.4.1"
+  }
+}
