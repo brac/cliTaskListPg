@@ -17,7 +17,7 @@ The original plan is as follows:
   * Write scripts in package.json to setup database(s)
 
 - Database Queries
-  - Review pg to connect to database, make queries
+  . Review pg to connect to database, make queries
   - Add Task
   - Delete Task
   - Write helpers before proceeding

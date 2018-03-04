@@ -5,16 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db:create" : "createdb tasks",
-    "db:drop" : "dropdb tasks",
-    "db:schema" : "psql tasks < schema.sql",
+    "db:create" : "createdb taskList",
+    "db:drop" : "dropdb taskList",
+    "db:schema" : "psql taskList < schema.sql",
     "db:reset" : "npm run db:drop && npm run db:create && npm run db:schema",
     "test" : "NODE_EVN=test mocha ./test/*_test.js",
     "test:queries" : "NODE_EVN=test mocha ./test/queries_test.js",
     "test:app" : "NODE_EVN=test mocha ./test/app_test.js",
-    "test:db:create" : "createdb tasks_test",
-    "test:db:drop" : "dropdb tasks_test",
-    "test:db:schema" : "psql tasks_test < schema.sql",
+    "test:db:create" : "createdb taskList_test",
+    "test:db:drop" : "dropdb taskList_test",
+    "test:db:schema" : "psql taskList_test < schema.sql",
     "test:db:reset" : "npm run test:db:drop && npm run test:db:create && npm run test:db:schema"
   },
   "repository": {

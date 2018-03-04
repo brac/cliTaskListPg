@@ -11,12 +11,16 @@ describe('Database queries', () => {
 
   context('addTask', () => {
     it('adds a task to the task list database', () => {
-      addTask()
+      return addTask('some task')
+        .then(res => {
+          console.log('got this in testing')
+          console.log(res)
+        })
     })
   })
 
   context('deleteTask', () => {
-    it('deletes a task from the list database', () => {
+    xit('deletes a task from the list database', () => {
       deleteTask()
     })
   })
