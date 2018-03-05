@@ -16,7 +16,8 @@ const pool = new Pool({
 function addTask(taskName) {
   return pool.query('SELECT * FROM tasks')
     .then(res => {
-      return 'Hi there!'
+      pool.end()
+      return res.rows
     })
     .catch(e => {
       console.error(`Encounted Error: ${e}`)

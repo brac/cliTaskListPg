@@ -13,7 +13,6 @@ describe('Database queries', () => {
     it('adds a task to the task list database', () => {
       return addTask('some task')
         .then(res => {
-          console.log('got this in testing')
           console.log(res)
         })
     })
