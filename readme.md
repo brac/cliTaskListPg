@@ -17,20 +17,21 @@ The original plan is as follows:
   * Write scripts in package.json to setup database(s)
 
 - Database Queries
-  . Review pg to connect to database, make queries
-  - Add Task
-  - Delete Task
+  * Review pg to connect to database, make queries
+  * Add Task
+  * List Tasks
+  - Convert to Promises
   - Write helpers before proceeding
-  - List Tasks
+    - Clear
+    - Insert
+    - Reset(?)
+  - Delete Task
   - Complete Task
   - Find task by id
 
 - Testing
   - Helpers
     - Write scripts to reset databases
-      - Clear
-      - Insert
-      - Reset(?)
   - Confirm separate databases for testing and production
   - Queries
     - Test List

@@ -28,7 +28,6 @@ describe('Database queries', () => {
         .then(res => {
           expect(res.length).to.equal(4)
         })
-        .catch(e => {console.error(`Found error during testing: ${e}`)})
     })
   })
 
