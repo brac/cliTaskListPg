@@ -16,7 +16,7 @@ module.exports = {
     return pool.query(text, params, callback)
   },
 
-  end:() => {
-    return pool.end()
+  getClient: () => {
+
   }
 }

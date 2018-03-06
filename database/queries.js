@@ -1,33 +1,30 @@
 // jshint asi:true
-// const { Pool } = require('pg')
+const { Client } = require('pg')
 
-// const databaseName = process.env.NODE_ENV === 'test' ? 'taskList_test' : 'taskList'
-// const pool = new Pool({
-//   user: process.env.USER,
-//   host: 'localhost',
-//   database: databaseName,
-//   password: null,
-//   port: 5432
-// })
-
-const db = require('./index.js')
-
-
+const databaseName = process.env.NODE_ENV === 'test' ? 'taskList_test' : 'taskList'
+const client = new Client({
+  user: process.env.USER,
+  host: 'localhost',
+  database: databaseName,
+  password: null,
+  port: 5432
+})
 
 list = () => {
-  return db.query('SELECT * FROM tasks')
-    .then(res => {
-      db.end()
+  client.connect()
+  return client.query('SELECT * FROM tasks')
+    .then((res) => {
+      client.end()
       return res.rows
     })
 }
 
 
 addTask = (taskName) =>  {
-  return db.query('INSERT INTO tasks (name) VALUES ($1)', [taskName])
+  return pool.query('INSERT INTO tasks (name) VALUES ($1)', [taskName])
     .then(res => {
-      db.end()
-      return res.rows
+      pool.done()
+      return 'Something was added'
     })
     .catch(e => {
       console.error(`Error in quiery File: ${e}`)

@@ -13,8 +13,8 @@ describe('Database queries', () => {
   context('listTasks', () => {
     it('Returns an array with the task list items', () => {
       return list()
-        .then( res => {
-          console.log(res)
+        .then(res => {
+          console.log(res.length)
         })
     })
   })
