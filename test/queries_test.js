@@ -14,17 +14,21 @@ describe('Database queries', () => {
     it('Returns an array with the task list items', () => {
       return list()
         .then(res => {
-          console.log(res.length)
+          expect(res.length).to.equal(3)
         })
     })
   })
 
   context('addTask', () => {
-    xit('adds a task to the task list database', () => {
-      return addTask('some other task')
-        .then(res => {
-          console.log(res)
+    it('adds a task to the task list database', () => {
+      return addTask('yet another task')
+        .then(() => {
+          return list()
         })
+        .then(res => {
+          expect(res.length).to.equal(4)
+        })
+        .catch(e => {console.error(`Found error during testing: ${e}`)})
     })
   })
 
