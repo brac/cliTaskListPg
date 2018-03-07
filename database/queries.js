@@ -16,21 +16,21 @@ list = () => {
 
     // Promise method
     client.connect()
-      .then(() => {
-        client.query('SELECT * FROM tasks')
-        .then(res => {
-          client.end()
-          resolve(res.rows)
-        })
-        .catch(e => {
-          client.end()
-          reject(new Error(`Error during list query: ${e.message}`))
-        })
+    .then(() => {
+      client.query('SELECT * FROM tasks')
+      .then(res => {
+        client.end()
+        resolve(res.rows)
       })
       .catch(e => {
         client.end()
-        reject(new Error(`Error during list connection: ${e.message}`))
+        reject(new Error(`Error during list query: ${e.message}`))
       })
+    })
+    .catch(e => {
+      client.end()
+      reject(new Error(`Error during list connection: ${e.message}`))
+    })
 
     // Callback method
     // client.connect()
@@ -42,14 +42,15 @@ list = () => {
   })
 }
 
-addTask = (taskName) =>  {
+addTask = (taskName, complete) =>  {
   return new Promise((resolve, reject) => {
+  if (complete == null) { complete = 'false'}
 
     // Promise method
     const client = new Client(databaseInfo)
     client.connect()
       .then(() => {
-        client.query('INSERT INTO tasks (name) VALUES ($1)', [taskName])
+        client.query('INSERT INTO tasks (name, complete) VALUES ($1, $2)', [taskName, complete])
         .then(() => {
           client.end()
           resolve(`Task added: ${taskName}`)
@@ -75,11 +76,37 @@ addTask = (taskName) =>  {
 }
 
 deleteTask = (id) => {
+  // TODO
+}
 
+deleteAllTasks = () => {
+  return new Promise((resolve, reject) => {
+    const client = new Client(databaseInfo)
+
+    client.connect()
+    .then(() =>{
+      client.query('DELETE FROM tasks')
+        .then(res => {
+          client.end()
+          resolve(`Something happened and I got this result: ${typeof res}`)
+      })
+      .catch(e => {
+        client.end()
+        console.log(`Error during deletion ${e.message}`)
+      })
+    })
+    .catch(e => {
+      client.end()
+      console.log(`Error during deletion connection: ${e.message}`)
+    })
+  })
 }
 
 module.exports = {
+  Client,
+  databaseInfo,
   list,
   addTask,
-  deleteTask
+  deleteTask,
+  deleteAllTasks
 }

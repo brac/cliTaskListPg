@@ -20,14 +20,17 @@ The original plan is as follows:
   * Review pg to connect to database, make queries
   * Add Task
   * List Tasks
-  - Convert to Promises
+  * Convert to Promises
   - Write helpers before proceeding
     - Clear
     - Insert
-    - Reset(?)
-  - Delete Task
-  - Complete Task
-  - Find task by id
+    - Reset
+  - Before/After Each
+  - Add Task =]/]=
+  - List Task =]/]=
+  - Delete Task =]/]=
+  - Complete Task =]/]=
+  - Find task by id(?)
 
 - Testing
   - Helpers
@@ -35,11 +38,11 @@ The original plan is as follows:
   - Confirm separate databases for testing and production
   - Queries
     - Test List
-      - Returns list of tasks
+      * Returns list of tasks
       - Throw error if the list is empty
     - Test Add
-      - Adds correct item
-      - Increments ID number and count of items
+      * Adds correct item
+      * Increments ID number and count of items
       - Throws error if empty task provided
     - Test Complete
       - Marks correct item as completed
@@ -91,4 +94,5 @@ Notes:
     .then(() => sql.db.any('ALTER SEQUENCE "group_members_id_seq" RESTART WITH 1;'))
 }
 ```
+Yes you do
 

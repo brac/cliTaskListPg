@@ -1,15 +1,17 @@
 [
   {
-    "name" : "Walk dogs"
+    "name" : "Walk the dogs"
   },
   {
-    "name" : "Water the plants"
+    "name" : "Water the plants",
+    "complete" : "true"
   },
   {
     "name" : "Vacuum the house"
   },
   {
-    "name" : "Wash the dishes"
+    "name" : "Wash the dishes",
+    "complete" : "true"
   },
   {
     "name" : "Make a salad"
