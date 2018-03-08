@@ -40,13 +40,13 @@ The original plan is as follows:
       * Adds correct item
       * Increments ID number and count of items
       * Throws error if empty task provided
+    - Test Delete
+      * Lowers the count of the tasks by one
+      - Deletes the correct item
+      - Throws an error if no item number was provided
     - Test Complete
       * Marks correct item as completed
       - Throws error if no item number was provided
-    - Test Delete
-      - Deletes the correct item
-      - Lowers the count of the tasks by one
-      - Throws an error if no item number was provided
   - App
     - Test List
       - Outputs the task list

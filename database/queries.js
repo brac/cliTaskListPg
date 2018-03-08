@@ -35,10 +35,10 @@ list = () => {
 
 addTask = (taskName, complete) =>  {
   if (taskName == null || taskName == '') { throw new Error('Please provide a task name')}
+  if (complete == null) {complete = 'false'}
 
   return new Promise((resolve, reject) => {
     const client = new Client(databaseInfo)
-    if (complete == null) {complete = 'false'}
 
     // console.log(`trying to add: ${taskName}`)
     client.connect()
