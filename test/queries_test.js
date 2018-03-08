@@ -7,13 +7,17 @@ const { list,
         deleteTask,
         completeTask }  = require('../database/queries.js')
 
+getRandom = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) ) + min
+}
+
 describe('Database queries', () => {
 
   beforeEach(resetDatabase)
   // afterEach(resetDatabase)
 
   context('listTasks', () => {
-    it('Returns an array with the task list items', () => {
+    it('returns an array with the task list items', () => {
       return list()
       .then( res => {
         expect(res.length).to.equal(6)
@@ -35,12 +39,14 @@ describe('Database queries', () => {
 
   context('deleteTask', () => {
     it('deletes the correct task', () => {
-      return deleteTask('2')
+      taskID = getRandom(1, 6)
+
+      return deleteTask(taskID)
       .then(() => {
         return list()
         .then(res => {
-          // console.log(res)
           expect(res.length).to.equal(5)
+          // TODO: Confirm which task was deleted
         })
       })
     })
@@ -48,7 +54,18 @@ describe('Database queries', () => {
   })
 
   context('completeTask', () => {
-    // TODO: happy path
+    it('marks the correct task as complete', () => {
+      taskID = getRandom(1, 6)
+
+      return completeTask(taskID)
+      .then(() => {
+        return list()
+        .then(res => {
+          let task = res.find((t) => { return t.id == taskID })
+          expect(task.complete).to.equal(true)
+        })
+      })
+    })
     // TODO: sad path
   })
 })

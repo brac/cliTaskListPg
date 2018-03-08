@@ -77,7 +77,21 @@ deleteAllTasks = () => {
       client.end()
       resolve(`All tasks deleted`)
     })
-    .catch(e => { reject(new Error(`Error trying to delete something: ${e.message}`))})
+    .catch(err => { reject(new Error(`Error trying to delete something: ${err.message}`))})
+  })
+}
+
+completeTask = (id) => {
+  return new Promise((resolve, reject) => {
+    const client = new Client(databaseInfo)
+
+    client.connect()
+    client.query('UPDATE tasks SET complete = true WHERE id = $1', [id])
+    .then(() => {
+      client.end()
+      resolve(`Task Completed with id:${id}`)
+    })
+    .catch(err => { reject(new Error(`Error trying to complete task: ${err.message}`))})
   })
 }
 
@@ -87,5 +101,6 @@ module.exports = {
   list,
   addTask,
   deleteTask,
-  deleteAllTasks
+  deleteAllTasks,
+  completeTask
 }
