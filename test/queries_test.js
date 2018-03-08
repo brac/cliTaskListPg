@@ -12,14 +12,6 @@ describe('Database queries', () => {
 
   beforeEach(resetDatabase)
 
-  // beforeEach(function (done) {
-    // resetDatabase().then((res) => {
-      // console.log(res)
-      // done()
-      // console.log('beforeEach completed')
-    // })
-  // })
-
   context('listTasks', () => {
     it('Returns an array with the task list items', () => {
       return list()
@@ -30,7 +22,7 @@ describe('Database queries', () => {
   })
 
   context('addTask', () => {
-    xit('adds a task to the task list database', () => {
+    it('adds a task to the task list database', () => {
       return addTask('yet another tasky')
       .then(() => {
         return list()

@@ -14,7 +14,6 @@ list = () => {
   return new Promise((resolve,reject) => {
     const client = new Client(databaseInfo)
 
-    // Promise method
     client.connect()
     .then(() => {
       client.query('SELECT * FROM tasks')
@@ -31,14 +30,6 @@ list = () => {
       client.end()
       reject(new Error(`Error during list connection: ${e.message}`))
     })
-
-    // Callback method
-    // client.connect()
-    // client.query('SELECT * FROM tasks', (err, res) => {
-      // if (err) {reject(new Error (`Error encountered during list query: ${err.message}`))}
-      // client.end()
-      // resolve(res.rows)
-    // })
   })
 }
 
@@ -48,7 +39,6 @@ addTask = (taskName, complete) =>  {
     if (complete == null) {complete = 'false'}
 
     // console.log(`trying to add: ${taskName}`)
-
     client.connect()
     client.query('INSERT INTO tasks (name, complete) VALUES ($1, $2)', [taskName, complete])
     .then(() => {
@@ -69,8 +59,7 @@ deleteAllTasks = () => {
   return new Promise((resolve, reject) => {
     const client = new Client(databaseInfo)
 
-    console.log('Deleting all tasks')
-
+    // console.log('Deleting all tasks')
     client.connect()
     client.query('DELETE FROM tasks')
     .then(() => {
