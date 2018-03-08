@@ -21,11 +21,13 @@ The original plan is as follows:
   * Add Task
   * List Tasks
   * Convert to Promises
-  - Write helpers before proceeding
-    - Clear
-    - Insert
-    - Reset
+  * Write helpers before proceeding
+    * Clear
+    * Insert
+    * Reset
+  * Suppress npm error message
   - Before/After Each
+    - Get it working
   - Add Task =]/]=
   - List Task =]/]=
   - Delete Task =]/]=
@@ -33,9 +35,9 @@ The original plan is as follows:
   - Find task by id(?)
 
 - Testing
-  - Helpers
-    - Write scripts to reset databases
-  - Confirm separate databases for testing and production
+  * Helpers
+    * Write scripts to reset databases
+  * Confirm separate databases for testing and production
   - Queries
     - Test List
       * Returns list of tasks
