@@ -36,20 +36,17 @@ The original plan is as follows:
   - Queries
     - Test List
       * Returns list of tasks
-      - Throw error if the list is empty
     - Test Add
       * Adds correct item
       * Increments ID number and count of items
-      - Throws error if empty task provided
+      * Throws error if empty task provided
     - Test Complete
-      - Marks correct item as completed
-      - Number of tasks in list stays the same
+      * Marks correct item as completed
       - Throws error if no item number was provided
     - Test Delete
       - Deletes the correct item
       - Lowers the count of the tasks by one
       - Throws an error if no item number was provided
-      - Re-arranges id numbers (maybe...)
   - App
     - Test List
       - Outputs the task list

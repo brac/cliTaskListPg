@@ -23,9 +23,9 @@ insertTaskFixtures = () => {
   return Promise.all(
     taskFixtures.map((task) => db.addTask(task.name, task.complete))
   )
-  .then(() =>{
+  // .then(() =>{
     // console.log('Fixtures inserted')
-  })
+  // })
 }
 
 resetDatabase = () => {
@@ -43,7 +43,7 @@ resetDatabase = () => {
       })
       // .catch(err => { reject(err)})
     })
-    // .catch(err => { reject(err)})
+    .catch(err => { reject(err)})
   })
 }
 

@@ -35,6 +35,10 @@ describe('Database queries', () => {
         })
       })
     })
+
+    it('throws an error if no task name is provided', () => {
+      expect(addTask).to.throw('Please provide a task name')
+    })
   })
 
   context('deleteTask', () => {

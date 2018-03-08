@@ -34,6 +34,8 @@ list = () => {
 }
 
 addTask = (taskName, complete) =>  {
+  if (taskName == null || taskName == '') { throw new Error('Please provide a task name')}
+
   return new Promise((resolve, reject) => {
     const client = new Client(databaseInfo)
     if (complete == null) {complete = 'false'}
