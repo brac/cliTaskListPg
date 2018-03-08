@@ -50,7 +50,7 @@ describe('Database queries', () => {
         return list()
         .then(res => {
           expect(res.length).to.equal(5)
-          // TODO: Confirm which task was deleted
+          expect(Object.values(res).find(t => { return t.id == taskID })).to.be.undefined //jshint ignore:line
         })
       })
     })
