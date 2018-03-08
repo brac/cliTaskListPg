@@ -52,7 +52,12 @@ addTask = (taskName, complete) =>  {
 }
 
 deleteTask = (id) => {
-  // TODO
+  return new Promise((resolve, reject) => {
+    const client = new Client(databaseInfo)
+    console.log(`Deleting task: ${id}`)
+    client.connect()
+    client.query('')
+  })
 }
 
 deleteAllTasks = () => {

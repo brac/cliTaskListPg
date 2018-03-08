@@ -41,11 +41,9 @@ resetDatabase = () => {
           resolve('database reset!')
         })
       })
+      .catch(err => { reject(err)})
     })
-    .catch(err => {
-      client.end()
-      reject( new Error(`Error during database reset: ${err.message}`))
-    })
+    .catch(err => { reject(err)})
   })
 }
 

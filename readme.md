@@ -16,7 +16,7 @@ The original plan is as follows:
   * Write fixtures for test database
   * Write scripts in package.json to setup database(s)
 
-- Database Queries
+- Database Query Setup
   * Review pg to connect to database, make queries
   * Add Task
   * List Tasks
@@ -26,15 +26,10 @@ The original plan is as follows:
     * Insert
     * Reset
   * Suppress npm error message
-  - Before/After Each
-    - Get it working
-  - Add Task =]/]=
-  - List Task =]/]=
-  - Delete Task =]/]=
-  - Complete Task =]/]=
-  - Find task by id(?)
+    * Get it working
 
 - Testing
+  * Before/After Each
   * Helpers
     * Write scripts to reset databases
   * Confirm separate databases for testing and production
@@ -73,11 +68,11 @@ The original plan is as follows:
       - Throws an error if no id is provided
       - Throws an error if an invalid id is provided
 
-- Helpers
-  - Reset Database
-    - Drop Tasks Table
-    - Create Tasks Table
-    - Insert Fixtures
+* Helpers
+  * Reset Database
+    * Drop Tasks Table
+    * Create Tasks Table
+    * Insert Fixtures
 
 - App
   - List Tasks
@@ -96,5 +91,5 @@ Notes:
     .then(() => sql.db.any('ALTER SEQUENCE "group_members_id_seq" RESTART WITH 1;'))
 }
 ```
-Yes you do
+Yes, yes you do. You'd have to reset the whole id sequence every time one task was deleted in order for it to also automatically reset back to 1 if everything was removed. Re-ordering the task ids if one is removed is not functionality outlined in the specs, so it won't be written.
 
