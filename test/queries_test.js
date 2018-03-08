@@ -25,7 +25,7 @@ describe('Database queries', () => {
     it('adds a task to the task list database', () => {
       return addTask('yet another tasky')
       .then(() => {
-        list()
+        return list()
         .then(res => {
           expect(res.length).to.equal(7)
         })
@@ -34,13 +34,14 @@ describe('Database queries', () => {
   })
 
   context('deleteTask', () => {
-    xit('deletes the correct task', () => {
-      deleteTask()
+    it('deletes the correct task', () => {
+      return deleteTask('2')
       .then(() => {
-        list()
-      })
-      .then(res => {
-        expect(res.length).to.equal(5)
+        return list()
+        .then(res => {
+          // console.log(res)
+          expect(res.length).to.equal(5)
+        })
       })
     })
     // TODO: sad path

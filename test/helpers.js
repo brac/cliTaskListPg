@@ -41,9 +41,9 @@ resetDatabase = () => {
           resolve('database reset!')
         })
       })
-      .catch(err => { reject(err)})
+      // .catch(err => { reject(err)})
     })
-    .catch(err => { reject(err)})
+    // .catch(err => { reject(err)})
   })
 }
 

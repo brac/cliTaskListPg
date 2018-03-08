@@ -54,9 +54,15 @@ addTask = (taskName, complete) =>  {
 deleteTask = (id) => {
   return new Promise((resolve, reject) => {
     const client = new Client(databaseInfo)
-    console.log(`Deleting task: ${id}`)
+
+    // console.log(`Deleting task: ${id}`)
     client.connect()
-    client.query('')
+    client.query('DELETE FROM tasks WHERE id = $1', [id])
+    .then(() => {
+      client.end()
+      resolve('task deleted')
+    })
+    .catch(err => { reject(new Error(`Error during task deletion: ${err.message}`))})
   })
 }
 
