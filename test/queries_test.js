@@ -54,7 +54,9 @@ describe('Database queries', () => {
         })
       })
     })
-    // TODO: sad path
+    it('throws an error if no task id is provided', () => {
+      expect(deleteTask).to.throw('Please provide a task id')
+    })
   })
 
   context('completeTask', () => {
@@ -70,7 +72,11 @@ describe('Database queries', () => {
         })
       })
     })
-    // TODO: sad path
+    it('throws an error if no task id is provided', () => {
+
+      expect(completeTask).to.throw('Please provide a task id')
+
+    })
   })
 })
 

@@ -33,20 +33,22 @@ The original plan is as follows:
   * Helpers
     * Write scripts to reset databases
   * Confirm separate databases for testing and production
-  - Queries
-    - Test List
+  * Queries
+    * Test List
       * Returns list of tasks
-    - Test Add
+    * Test Add
       * Adds correct item
       * Increments ID number and count of items
       * Throws error if empty task provided
-    - Test Delete
+    * Test Delete
       * Lowers the count of the tasks by one
-      - Deletes the correct item
-      - Throws an error if no item number was provided
-    - Test Complete
+      * Deletes the correct item
+      * Throws an error if no item number was provided
+    * Test Complete
       * Marks correct item as completed
-      - Throws error if no item number was provided
+      * Throws error if no item number was provided
+
+  <!-- Optional would have to use sinon-->
   - App
     - Test List
       - Outputs the task list
@@ -64,6 +66,7 @@ The original plan is as follows:
       - Outputs the task deleted
       - Throws an error if no id is provided
       - Throws an error if an invalid id is provided
+  <!-- Optional -->
 
 * Helpers
   * Reset Database

@@ -54,6 +54,8 @@ addTask = (taskName, complete) =>  {
 }
 
 deleteTask = (id) => {
+  if (id == null || id == '') { throw new Error('Please provide a task id')}
+
   return new Promise((resolve, reject) => {
     const client = new Client(databaseInfo)
 
@@ -84,6 +86,8 @@ deleteAllTasks = () => {
 }
 
 completeTask = (id) => {
+  if (id == null || id == '') { throw new Error('Please provide a task id')}
+
   return new Promise((resolve, reject) => {
     const client = new Client(databaseInfo)
 
