@@ -1,87 +1,89 @@
-# Project Title
+# Command Line Task List with Postgres and SQL
 
-One Paragraph of project description goes here
+This is a simple task list tool that will keep track of custom tasks entered by the user. The application allows for adding, completing, deleting and listing of tasks stored in a postgres database. This application assumes that you already have a postgres server running with default settings.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Clone the repo from ```brac/cliTaskListPg```
+
+Install the dependencies:
+```npm install```
+
+For the first time usage, create the initial database and load the schema
+```npm db:start```
+
+To reset your task list, reset the database:
+```npm run db:reset```
+
+Once the database is setup you can begin adding, completed, listing and deleting tasks. See below for examples
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Be sure to have postgres installed and running on your local machine. I recommend using Brew to install and start/stop the service:
 
-```
-Give examples
-```
+```brew install postgresql```
+
+you can initialize or stop the daemon with these commands:
+
+```brew services start postgresql``` or ```brew services stop postgresql.```
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+To install, clone the repo from ```brac/cliTaskListPg```
 
-Say what the step will be
+Install the dependencies:
+```npm install```
 
-```
-Give the example
-```
+If this is a fresh install and you system does not yet have taskList database, run the following:
+```npm db:start```
 
-And repeat
+To reset your task list, reset the database:
+```npm run db:reset```
 
-```
-until finished
-```
+To list your tasks run:
+```./app/cliTaskListPg list```
 
-End with an example of getting some data out of the system or using it for a little demo
+To add a task run:
+```./app/cliTaskListPg add 'my new task'```
+
+To complete a task, task 3 in this example, run:
+```./app/cliTaskListPg complete 3```
+
+To delete a task, task 2 in this example: run:
+```./app/cliTaskListPg delete 2```
+
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+In order to run the query tests you will have to build the test database first. You only have to do this once:
+```npm run test:db:start```
 
-### Break down into end to end tests
+Then run the test suite:
+```npm run test```
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Mocha and Chai](http://chaijs.com/) - Testing Framework
+* [PG](https://www.npmjs.com/package/pg) - Postgres SQL Client
+* [Node.js](https://nodejs.org/en/) - Package deployment
+
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Submit a pull request if you have an idea on how I could improve this little tool.
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Ben Bracamonte** - *Initial work* - [Brac](https://github.com/brac)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* Jared Grippe, javascript and programming guru
+* Eric Nicholas, coding and moral support
+* Lenny and Rudy, the goodest of boys
