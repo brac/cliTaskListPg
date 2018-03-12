@@ -48,5 +48,5 @@ Since I was sure my queries were going to work, writing the app was pretty strai
 
 For each command call that the user may enter, we have a ```case``` that will catch it. I should include a default..... Some of these, like ```complete``` and ```delete``` have some error checking right off the bat, as we need to call ```list()``` to confirm the execution so we do that first before trying to run the query.
 
-_A little bit of formatting and the app is good to go!_
+A little bit of formatting and the app is good to go!
 
