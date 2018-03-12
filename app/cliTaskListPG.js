@@ -8,31 +8,56 @@ taskList = (cmd, task) => {
     case 'list':
       db.list()
       .then(res => {
-        console.log(res)
-        // console.log(`I will list the following data: ${res}`)
-      })
-      break
+        // Print the header
+        console.log(`\nID Description \n-- ----------- `)
 
-    case 'addTask':
+        // Print the list
+        for (let i = 0; i < res.length; i++) {
+          console.log(`${res[i].id}  ${res[i].name}`)
+        }
+
+        // Print the summation
+        console.log(`\nYou have ${ res.length} tasks\n` )
+      })
+      .catch(err => { console.error(err.message)})
+    break
+
+    case 'add':
       db.addTask(task)
       .then(() => {
-        console.log('I have added a task')
+        db.list()
+        .then(res => {
+          console.log(`Created task: ${res[res.length-1].id}`)
+        })
       })
-      break
+      .catch(err => { console.error(err.message)})
+    break
 
-    case 'completeTask':
+    case 'complete':
       db.completeTask(task)
       .then(() => {
-        console.log('I have completed a task')
-      })
-      break
-
-      case 'deleteTask':
-        db.deleteTask()
-        .then(() => {
-          console.log('I deleted a task')
+        db.list()
+        .then(res => {
+          let taskName = res.find(t => { return t.id == task })
+          console.log(`Completed task: ${ taskName.name }`)
         })
-      break
+      })
+      .catch(err => { console.error(err.message)})
+    break
+
+    case 'delete':
+      db.list()
+      .then(res => {
+        let taskName = res.find(t => { return t.id == task })
+
+        db.deleteTask(task)
+        .then(() => {
+          // console.log('i made it here')
+          console.log(`Deleted task: ${taskName.name}`)
+        })
+        .catch(err => { console.error(err.message)})
+      })
+    break
   }
 }
 

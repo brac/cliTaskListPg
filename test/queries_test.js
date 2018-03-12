@@ -57,6 +57,14 @@ describe('Database queries', () => {
     it('throws an error if no task id is provided', () => {
       expect(deleteTask).to.throw('Please provide a task id')
     })
+
+    it('throw an error if an invalid task id is provided', () => {
+      return deleteTask(100)
+      .catch(err => {
+        expect(err).to.be.an.instanceof(Error).with.property('message','That task id has already been deleted')
+      })
+    })
+
   })
 
   context('completeTask', () => {

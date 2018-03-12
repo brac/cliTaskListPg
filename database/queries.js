@@ -16,7 +16,7 @@ list = () => {
 
     client.connect()
     .then(() => {
-      client.query('SELECT * FROM tasks')
+      client.query('SELECT * FROM tasks ORDER BY id')
       .then(res => {
         client.end()
         resolve(res.rows)
@@ -40,7 +40,7 @@ addTask = (taskName, complete) =>  {
   return new Promise((resolve, reject) => {
     const client = new Client(databaseInfo)
 
-    // console.log(`trying to add: ${taskName}`)
+    //DEBUG: console.log(`trying to add: ${taskName}`)
     client.connect()
     client.query('INSERT INTO tasks (name, complete) VALUES ($1, $2)', [taskName, complete])
     .then(() => {
@@ -59,14 +59,21 @@ deleteTask = (id) => {
   return new Promise((resolve, reject) => {
     const client = new Client(databaseInfo)
 
-    // console.log(`Deleting task: ${id}`)
-    client.connect()
-    client.query('DELETE FROM tasks WHERE id = $1', [id])
-    .then(() => {
-      client.end()
-      resolve('task deleted')
+    list()
+    .then(res => {
+      // Check if task id is present in the database
+      let found = res.some(t => { return t.id === id})
+      if (!found) { reject(new Error('That task id has already been deleted'))}
+
+      //DEBUG: console.log(`Deleting task: ${id}`)
+      client.connect()
+      client.query('DELETE FROM tasks WHERE id = $1', [id])
+      .then(() => {
+        client.end()
+        resolve('task deleted')
+      })
+      .catch(err => { reject(new Error(`Error during task deletion: ${err.message}`))})
     })
-    .catch(err => { reject(new Error(`Error during task deletion: ${err.message}`))})
   })
 }
 
@@ -74,7 +81,7 @@ deleteAllTasks = () => {
   return new Promise((resolve, reject) => {
     const client = new Client(databaseInfo)
 
-    // console.log('Deleting all tasks')
+    //DEBUG: console.log('Deleting all tasks')
     client.connect()
     client.query('DELETE FROM tasks')
     .then(() => {
