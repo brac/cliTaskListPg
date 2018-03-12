@@ -14,7 +14,7 @@
     "test:db:create": "createdb taskList_test",
     "test:db:drop": "dropdb taskList_test",
     "test:db:schema": "psql taskList_test < schema.sql",
-    "test:db:reset": "npm run test:db:drop && npm run test:db:create && npm run test:db:schema && psql taskList_test < ./test/fixtures/tasks.sql"
+    "test:db:reset": "npm run test:db:drop && npm run test:db:create && npm run test:db:schema"
   },
   "repository": {
     "type": "git",

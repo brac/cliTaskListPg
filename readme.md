@@ -1,95 +1,87 @@
-# Command Line Task List using Postgres
+# Project Title
 
-This exercise is intended to show a demonstration of the following skill competencies:
+One Paragraph of project description goes here
 
-Javascript
-Node
-npm
-SQL
-Mocha
-Postgres
+## Getting Started
 
-The original plan is as follows:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-- Database setup
-  * Write schema for database(s)
-  * Write fixtures for test database
-  * Write scripts in package.json to setup database(s)
+### Prerequisites
 
-- Database Query Setup
-  * Review pg to connect to database, make queries
-  * Add Task
-  * List Tasks
-  * Convert to Promises
-  * Write helpers before proceeding
-    * Clear
-    * Insert
-    * Reset
-  * Suppress npm error message
-    * Get it working
+What things you need to install the software and how to install them
 
-- Testing
-  * Before/After Each
-  * Helpers
-    * Write scripts to reset databases
-  * Confirm separate databases for testing and production
-  * Queries
-    * Test List
-      * Returns list of tasks
-    * Test Add
-      * Adds correct item
-      * Increments ID number and count of items
-      * Throws error if empty task provided
-    * Test Delete
-      * Lowers the count of the tasks by one
-      * Deletes the correct item
-      * Throws an error if no item number was provided
-    * Test Complete
-      * Marks correct item as completed
-      * Throws error if no item number was provided
-
-  <!-- Optional would have to use sinon-->
-  - App
-    - Test List
-      - Outputs the task list
-      - Outputs custom message if list is empty
-    - Test Add
-      - Add task to the list, output task added
-      - Throws error if empty task provided
-      - Creates list if absent
-    - Test Complete
-      - Completes the correct task
-      - Outputs task completed
-      - Throws error if no item number was provided
-    - Test Delete
-      - Deletes the item from the list
-      - Outputs the task deleted
-      - Throws an error if no id is provided
-      - Throws an error if an invalid id is provided
-  <!-- Optional -->
-
-* Helpers
-  * Reset Database
-    * Drop Tasks Table
-    * Create Tasks Table
-    * Insert Fixtures
-
-* App
-  * List Tasks
-  * Add Task
-  * Complete Task
-  * Delete Task
-
-
-Notes:
-  Do I need to worry about resetting the ids every time I rebuild the database?
-  ```javascript
-  function resetSequences() {
-  // sets all id series back to 1 so that we can deterministically work with ids
-  return sql.db.any('ALTER SEQUENCE "contacts_id_seq" RESTART WITH 1;')
-    .then(() => sql.db.any('ALTER SEQUENCE "groups_id_seq" RESTART WITH 1;'))
-    .then(() => sql.db.any('ALTER SEQUENCE "group_members_id_seq" RESTART WITH 1;'))
-}
 ```
-Yes, yes you do. You'd have to reset the whole id sequence every time one task was deleted in order for it to also automatically reset back to 1 if everything was removed. Re-ordering the task ids if one is removed is not functionality outlined in the specs, so it won't be written.
+Give examples
+```
 
+### Installing
+
+A step by step series of examples that tell you have to get a development env running
+
+Say what the step will be
+
+```
+Give the example
+```
+
+And repeat
+
+```
+until finished
+```
+
+End with an example of getting some data out of the system or using it for a little demo
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Deployment
+
+Add additional notes about how to deploy this on a live system
+
+## Built With
+
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+
+## Authors
+
+* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Hat tip to anyone who's code was used
+* Inspiration
+* etc
