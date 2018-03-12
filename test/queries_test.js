@@ -81,9 +81,7 @@ describe('Database queries', () => {
       })
     })
     it('throws an error if no task id is provided', () => {
-
       expect(completeTask).to.throw('Please provide a task id')
-
     })
   })
 })

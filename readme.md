@@ -74,11 +74,11 @@ The original plan is as follows:
     * Create Tasks Table
     * Insert Fixtures
 
-- App
-  - List Tasks
-  - Add Task
-  - Complete Task
-  - Delete Task
+* App
+  * List Tasks
+  * Add Task
+  * Complete Task
+  * Delete Task
 
 
 Notes:

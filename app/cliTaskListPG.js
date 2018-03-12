@@ -1,4 +1,6 @@
+#!/usr/local/bin/node
 // jshint asi:true
+
 const db      = require('../database/queries')
 const command = process.argv[2]
 const task    = process.argv[3]
@@ -29,34 +31,44 @@ taskList = (cmd, task) => {
         .then(res => {
           console.log(`Created task: ${res[res.length-1].id}`)
         })
+        .catch(err => { console.error(err.message)})
       })
       .catch(err => { console.error(err.message)})
     break
 
     case 'complete':
-      db.completeTask(task)
-      .then(() => {
-        db.list()
-        .then(res => {
-          let taskName = res.find(t => { return t.id == task })
-          console.log(`Completed task: ${ taskName.name }`)
-        })
+      db.list()
+      .then(res => {
+        let found = res.some(t => { return t.id == task})
+        if (!found) {
+          console.error('That task does not exist, please check the id you provided')
+        } else {
+          db.completeTask(task)
+          .then(() => {
+            let taskName = res.find(t => { return t.id == task })
+            console.log(`Completed task: ${ taskName.name }`)
+          })
+          .catch(err => console.error(err.message))
+        }
       })
-      .catch(err => { console.error(err.message)})
+      .catch(err => console.error(err.message))
     break
 
     case 'delete':
       db.list()
       .then(res => {
-        let taskName = res.find(t => { return t.id == task })
-
+        let found = res.some(t => { return t.id == task })
+        if (!found) { console.error('That task id has been deleted or is not present')
+      } else {
         db.deleteTask(task)
         .then(() => {
-          // console.log('i made it here')
+          taskName = res.find(t => { return t.id == task})
           console.log(`Deleted task: ${taskName.name}`)
         })
-        .catch(err => { console.error(err.message)})
+        .catch(err => console.error(err.message))
+      }
       })
+      .catch(err => console.error(err.message))
     break
   }
 }
