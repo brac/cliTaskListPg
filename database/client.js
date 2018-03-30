@@ -1,8 +1,9 @@
 // jshint asi:true
-const { Pool } = require('pg')
+const { Client } = require('pg')
 
 const databaseName = process.env.NODE_ENV === 'test' ? 'taskList_test' : 'taskList'
-const pool = new Pool({
+
+const client = new Client({
   user: process.env.USER,
   host: 'localhost',
   database: databaseName,
@@ -10,13 +11,6 @@ const pool = new Pool({
   port: 5432
 })
 
+client.connect()
 
-module.exports = {
-  query: (text, params, callback) => {
-    return pool.query(text, params, callback)
-  },
-
-  getClient: () => {
-
-  }
-}
+module.exports = client

@@ -1,108 +1,85 @@
-// jshint asi:true
-const { Pool, Client } = require('pg')
+const client = require('./client')
 
-const databaseName = process.env.NODE_ENV === 'test' ? 'taskList_test' : 'taskList'
-const databaseInfo = {
-  user: process.env.USER,
-  host: 'localhost',
-  database: databaseName,
-  password: null,
-  port: 5432
+const list = () =>
+  client.query('SELECT * FROM tasks ORDER BY id').then(
+    queryResults => queryResults.rows,
+    error => { throw new Error(`Error during list query: ${error}`) },
+  )
+
+const addTask = (taskName, complete) =>  {
+  if (!taskName) {
+    return Promise.reject(new Error('Please provide a task name'));
+  }
+
+  return client.query(
+    `
+    INSERT INTO
+      tasks (name, complete)
+    VALUES
+      ($1, $2)
+    RETURNING
+      *
+    `,
+    [taskName, !!complete]
+  ).then(
+    queryResults => queryResults.rows[0],
+    error => { throw new Error(`failed add task: ${error}`) },
+  )
 }
 
-list = () => {
-  return new Promise((resolve,reject) => {
-    const client = new Client(databaseInfo)
+const deleteTask = (taskId) => {
+  if (!taskId) {
+    return Promise.reject(new Error('Please provide a task id'))
+  }
 
-    client.connect()
-    .then(() => {
-      client.query('SELECT * FROM tasks ORDER BY id')
-      .then(res => {
-        client.end()
-        resolve(res.rows)
-      })
-      .catch(e => {
-        client.end()
-        reject(new Error(`Error during list query: ${e.message}`))
-      })
-    })
-    .catch(e => {
-      client.end()
-      reject(new Error(`Error during list connection: ${e.message}`))
-    })
+  return client.query(
+    `
+      DELETE FROM
+        tasks
+      WHERE
+        id = $1
+      RETURNING *
+    `,
+    [taskId]
+  ).then(
+    queryResults => queryResults.rows[0],
+    error => { throw new Error(`Error deleting task ${taskId}: ${error}`) },
+  )
+}
+
+const deleteAllTasks = () =>
+  client.query('DELETE FROM tasks')
+    .catch(error => { throw new Error(`Error trying to delete all tasks: ${error}`) })
+
+const completeTask = (taskId) => {
+  if (!taskId) {
+    return Promise.reject(new Error('Please provide a task id'))
+  }
+
+  return client.query(
+    `
+    UPDATE
+      tasks
+    SET
+      complete=true
+    WHERE
+      id=$1
+    RETURNING
+      *
+    `,
+    [taskId]
+  )
+  .catch(error => {
+    throw new Error(`Error trying to complete task ${taskId}: ${error}`)
   })
-}
-
-addTask = (taskName, complete) =>  {
-  if (taskName == null || taskName == '') { throw new Error('Please provide a task name')}
-  if (complete == null) {complete = 'false'}
-
-  return new Promise((resolve, reject) => {
-    const client = new Client(databaseInfo)
-
-    //DEBUG: console.log(`trying to add: ${taskName}`)
-    client.connect()
-    client.query('INSERT INTO tasks (name, complete) VALUES ($1, $2)', [taskName, complete])
-    .then(() => {
-      client.end()
-      resolve(`task added: ${taskName}`)
-    })
-    .catch(e => {
-      client.end()
-      reject(e.message)})
-  })
-}
-
-deleteTask = (id) => {
-  if (id == null || id == '') { throw new Error('Please provide a task id')}
-
-  return new Promise((resolve, reject) => {
-    const client = new Client(databaseInfo)
-
-    client.connect()
-    client.query('DELETE FROM tasks WHERE id = $1', [id])
-    .then(() => {
-      client.end()
-      resolve('task deleted')
-    })
-    .catch(err => { reject(new Error(`Error during task deletion: ${err.message}`))})
-  })
-}
-
-deleteAllTasks = () => {
-  return new Promise((resolve, reject) => {
-    const client = new Client(databaseInfo)
-
-    //DEBUG: console.log('Deleting all tasks')
-    client.connect()
-    client.query('DELETE FROM tasks')
-    .then(() => {
-      client.end()
-      resolve(`All tasks deleted`)
-    })
-    .catch(err => { reject(new Error(`Error trying to delete something: ${err.message}`))})
-  })
-}
-
-completeTask = (id) => {
-  if (id == null || id == '') { throw new Error('Please provide a task id')}
-
-  return new Promise((resolve, reject) => {
-    const client = new Client(databaseInfo)
-
-    client.connect()
-    client.query('UPDATE tasks SET complete = true WHERE id = $1', [id])
-    .then(() => {
-      client.end()
-      resolve(`Task Completed with id:${id}`)
-    })
-    .catch(err => { reject(new Error(`Error trying to complete task: ${err.message}`))})
+  .then(queryResults => queryResults.rows[0])
+  .then(task => {
+    if (!task) throw new Error(`unable to complete task ${taskId}`)
+    return task
   })
 }
 
 module.exports = {
-  Client,
-  databaseInfo,
   list,
   addTask,
   deleteTask,
